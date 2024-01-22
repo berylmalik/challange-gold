@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Settings - BingleShop</title>
+    </head>
+    <body>
+        <center>
+            <br />
+            <h1>BingleShop - Settings</h1>
+            <h2><button onclick="redirectHome()">Back</button></h2>
+            <h2>
+                <button onclick="deleteAccount(), redirectDeletedPage()">Delete Account</button>
+            </h2>
+            <h2><button onclick="redirectIndex()">Log Out</button></h2>
+        </center>
+    </body>
+    <script>
+        function redirectHome() {
+            window.location.href = "/home";
+        }
+        function redirectIndex() {
+            window.location.href = "/";
+        }
+        function redirectDeletedPage() {
+            window.location.href = "/settings/deletedAccount";
+        }
+        function deleteAccount() {
+            fetch("/home/settings", {
+                method: "DELETE",
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        console.error("Account deleted successfully");
+                    } else {
+                        console.error("Failed to delete account");
+                    }
+                })
+                .catch((error) => console.error("Error:", error));
+        }
+    </script>
+</html>

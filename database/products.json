@@ -1,0 +1,7 @@
+[
+    { "product_id": 1, "item": "Topi", "price": 1000, "quantity": 10 },
+    { "product_id": 2, "item": "Baju", "price": 2000, "quantity": 8 },
+    { "product_id": 3, "item": "Celana", "price": 3000, "quantity": 6 },
+    { "product_id": 4, "item": "Jaket", "price": 4000, "quantity": 4 },
+    { "product_id": 5, "item": "Sepatu", "price": 5000, "quantity": 2 }
+]

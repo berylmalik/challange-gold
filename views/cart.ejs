@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cart - BingleShop</title>
+    </head>
+    <body>
+        <center>
+            <h1>Your cart item list</h1>
+            <br />
+            <h3><%= seeOrder %></h3>
+            <h3>Your total payment is Rp.<%= totalSum %>,-</h3>
+            <h2><button onclick="redirectHome()">Back</button></h2>
+            <h2><button onclick="paymentStatus(), redirectPay()">Pay Now!</button></h2>
+        </center>
+    </body>
+    <script>
+        function redirectHome() {
+            window.location.href = "/home";
+        }
+        function redirectPay() {
+            window.location.href = "/home/pay";
+        }
+        function paymentStatus() {
+            fetch("/home/cart", {
+                method: "POST",
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        console.error("Success");
+                    } else {
+                        console.error("Failed");
+                    }
+                })
+                .catch((error) => console.error("Error:", error));
+        }
+    </script>
+</html>

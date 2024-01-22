@@ -1,0 +1,5 @@
+[
+    { "user_id": 1, "name": "Binar", "address": "merdeka street 19", "email": "binar@mail.com", "password": "Password123!" },
+    { "user_id": 2, "name": "Academy", "address": "merdeka street 19", "email": "academy@mail.com", "password": "Password123!" },
+    { "user_id": 3, "name": "Cek", "address": "merdeka street 19", "email": "cek@mail.com", "password": "111" }
+]

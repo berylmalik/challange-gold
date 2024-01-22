@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>BingleShop</title>
+    </head>
+    <body>
+        <center>
+            <h1>Your paidment is complete!</h1>
+            <h2>
+                <button onclick="pushShipment(), redirectHome()">
+                    Send your ordered item here!
+                </button>
+            </h2>
+            <h2><button onclick="redirectIndex()">Log out</button></h2>
+        </center>
+    </body>
+    <script>
+        function redirectHome() {
+            window.location.href = "/home";
+        }
+        function redirectIndex() {
+            window.location.href = "/";
+        }
+        function pushShipment() {
+            fetch("/home/pay", {
+                method: "POST",
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        console.error("Success");
+                    } else {
+                        console.error("Failed");
+                    }
+                })
+                .catch((error) => console.error("Error:", error));
+        }
+    </script>
+</html>

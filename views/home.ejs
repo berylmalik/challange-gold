@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>BingleShop</title>
+    </head>
+    <body>
+        <h2>Hi <%= username %></h2>
+        <h3><button onclick="redirectSettings()">Settings</button></h3>
+        <h3><button onclick="redirectCart()">Cart</button></h3>
+        <center>
+            <h1>BingleShop</h1>
+            <h2>Happy Shopping!</h2>
+            <h3>
+                <button onclick="productPlusMin('min', 1)">-</button>Topi<button
+                    onclick="productPlusMin('plus', 1)"
+                >
+                    +
+                </button>
+            </h3>
+            <h3>
+                <button onclick="productPlusMin('min', 2)">-</button>Baju<button
+                    onclick="productPlusMin('plus', 2)"
+                >
+                    +
+                </button>
+            </h3>
+            <h3>
+                <button onclick="productPlusMin('min', 3)">-</button>Celana<button
+                    onclick="productPlusMin('plus', 3)"
+                >
+                    +
+                </button>
+            </h3>
+            <h3>
+                <button onclick="productPlusMin('min', 4)">-</button>Jaket<button
+                    onclick="productPlusMin('plus', 4)"
+                >
+                    +
+                </button>
+            </h3>
+            <h3>
+                <button onclick="productPlusMin('min', 5)">-</button>Sepatu<button
+                    onclick="productPlusMin('plus', 5)"
+                >
+                    +
+                </button>
+            </h3>
+        </center>
+    </body>
+
+    <script>
+        function redirectSettings() {
+            window.location.href = "/home/settings";
+        }
+        function redirectCart() {
+            window.location.href = "/home/cart";
+        }
+        function productPlusMin(method, id) {
+            fetch("/home", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ method, id }),
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        console.error("Success");
+                    } else {
+                        console.error("Failed");
+                    }
+                })
+                .catch((error) => console.error("Error:", error));
+        }
+    </script>
+</html>
