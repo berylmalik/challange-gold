@@ -8,6 +8,11 @@ const fs = require("fs");
 
 allRouter.route("").get(UserController.getIndexPage);
 
+allRouter
+    .route("/home/update-profile")
+    .get(UserController.getUpdatePage)
+    .patch(UserController.updateProfile);
+
 allRouter.route("/register").get(UserController.getRegisterPage).post(UserController.createId);
 
 allRouter.route("/login").get(UserController.getLoginPage).post(UserController.loginById);
@@ -23,5 +28,5 @@ allRouter
 allRouter.route("/settings/deletedAccount").get(UserController.getDeletedAccountPage);
 
 allRouter.route("/home/cart").get(UserController.getCartPage).post(ProductController.paymentStatus);
-allRouter.route("/home/pay").get(UserController.getPayPage).post(ProductController.pushShipment)
+allRouter.route("/home/pay").get(UserController.getPayPage).post(ProductController.pushShipment);
 module.exports = { allRouter };

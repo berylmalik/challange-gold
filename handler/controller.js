@@ -18,6 +18,9 @@ class UserController {
     static getRegisterPage(req, res) {
         return res.status(200).render("register");
     }
+    static getUpdatePage(req, res) {
+        return res.status(200).render("updateProfile");
+    }
     static getDeletedAccountPage(req, res) {
         return res.status(200).render("deletedAccount");
     }
@@ -149,6 +152,30 @@ class UserController {
         } catch (error) {
             console.error("Error during deleting account", error);
             return res.status(500).send("Internal Server Error)");
+        }
+    }
+
+    static async updateProfile(req, res) {
+        const { name, address, password } = req.body;
+        try {
+            const user = await User.findByPk(req.session.userData.user_id);
+
+            // Check if the user exists
+            if (!user) {
+                return res.status(404).json({ message: "User not found" });
+            }
+
+            // Update the user's profile with the provided information
+            user.name = name || user.name;
+            user.address = address || user.address;
+            user.password = password || user.password;
+
+            await user.save();
+
+            return res.status(200).redirect("/login");
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ message: "Internal Server Error" });
         }
     }
 }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Update Profile - BingleShop</title>
+    </head>
+    <body>
+        <center>
+            <form action="/update-profile" method="post">
+                <label for="name">Name</label>
+                <br />
+                <input type="text" name="name" placeholder="Input your name" />
+                <br />
+
+                <label for="password">Password</label>
+                <br />
+                <input type="password" name="password" placeholder="Input your passwrd" />
+                <br />
+
+                <label for="address">Address</label>
+                <br />
+                <input type="text" name="address" placeholder="Input your address" />
+                <br />
+                <button type="button" onclick="updateProfile()">Submit</button>
+            </form>
+        </center>
+    </body>
+    <script>
+        function updateProfile() {
+            const formData = new FormData(document.getElementById("updateProfileForm"));
+
+            fetch("/home/update-profile", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(Object.fromEntries(formData)),
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        console.log("Success");
+                    } else {
+                        console.log("Failed");
+                    }
+                })
+                .catch((error) => console.error("Error:", error));
+        }
+    </script>
+</html>

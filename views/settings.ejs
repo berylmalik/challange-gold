@@ -13,10 +13,14 @@
             <h2>
                 <button onclick="deleteAccount(), redirectDeletedPage()">Delete Account</button>
             </h2>
+            <h2><button onclick="redirectUpdate()">Update Profile</button></h2>
             <h2><button onclick="redirectIndex()">Log Out</button></h2>
         </center>
     </body>
     <script>
+        function redirectUpdate() {
+            window.location.href = "/home/update-profile";
+        }
         function redirectHome() {
             window.location.href = "/home";
         }
