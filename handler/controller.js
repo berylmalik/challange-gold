@@ -2,6 +2,7 @@ const { Cookie } = require("express-session");
 const { formatResponse } = require("../helpers/formatResponse");
 const { User, Product, Order, Shipment } = require("../models");
 
+//Note: Masing-masing controller bisa dipisah di file yang berbeda supaya lebih readable
 class UserController {
     static getIndexPage(req, res) {
         req.session.destroy();
@@ -31,6 +32,8 @@ class UserController {
         let { seeOrder, totalSum, orderedItem } = await ProductController.getTotalPrice(
             req.session.userData.user_id
         );
+
+        //Note: Console.log tidak terpakai bisa dihapus
         console.log(seeOrder, "<<<<<< SeeOrder");
         console.log(totalSum, "<<<<<<< totalSum");
         return res.status(200).render("cart", { seeOrder, totalSum });
@@ -55,6 +58,7 @@ class UserController {
                 req.session.authenticated = true;
                 req.session.userData = foundUser;
 
+                //Note: Console.log bisa dihapus saja karena sudah pakai morgan
                 console.log(formatResponse(req.session.userData));
                 res.status(200).redirect("/home");
             } else {
@@ -115,6 +119,7 @@ class UserController {
 
             // Creating new user in database
             if (!checkEmail && isCorrectPassword === true) {
+                //Note: Tidak disarankan menyimpan password ke database tanpa enkripsi. Bisa pakai library bcryptjs
                 let newUser = await User.create({
                     name: name,
                     email: email,
@@ -311,7 +316,7 @@ class ProductController extends UserController {
 
                 if (order.quantity > 0) {
                     changeStatus.order_status = "shipped";
-                    await changeStatus.save();
+                    await changeStatus.save(); //Note: Karena ada pengulangan changeStatus.save(),  bisa diletakkan diluar if else saja supaya cuma dipanggil sekali
                 } else if (order.quantity === 0) {
                     changeStatus.order_status = "cancelled";
                     await changeStatus.save();

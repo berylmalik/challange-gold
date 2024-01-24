@@ -1,6 +1,7 @@
 const express = require("express");
 const allRouter = express.Router();
 
+//Note: Variable tidak terpakai bisa dihapus saja
 const users = require("../database/users.json");
 const { formatResponse } = require("../helpers/formatResponse.js");
 const { UserController, ProductController } = require("../handler/controller.js");
